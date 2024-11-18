@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService{
         if (result.getUserPw().equals(password)) {
             return result;
         }
+        System.out.println("패스워드 불일치! 다시 로그인하세요");
         return null;
     }
 
