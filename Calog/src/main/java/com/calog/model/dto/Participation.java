@@ -11,15 +11,14 @@ public class Participation {
     private int eventId;
     private int userId;
 
-    public Participation(int id, int eventId, int userId) {
-        this.id = id;
+    public Participation(int eventId, int userId) {
         this.eventId = eventId;
         this.userId = userId;
     }
 
 
     public Participation(int id, int eventId, int userId, String memo) {
-        this(id, eventId, userId);
+        this(eventId, userId);
         this.memo = memo;
     }
 

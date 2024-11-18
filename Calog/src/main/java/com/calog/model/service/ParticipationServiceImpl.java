@@ -14,34 +14,27 @@ public class ParticipationServiceImpl implements ParticipationService {
     @Override
     public List<Participation> getAllParticipationByUserId(int userId) {
         System.out.println("유저의 모든 참여 기록 조회");
-        List<Participation>result = pd.selectAllByUserId(userId);
-        if (result!=null){
-            return result;
-        }
-
-        return null;
+        return pd.selectAllByUserId(userId);
     }
 
     @Override
     public List<Participation> getParticipationBySport(int userId, int eventId) {
         System.out.println("대회 종목 별 참여 기록 조회");
-        List<Participation>result = pd.selectByUserIdFiltSport(userId, eventId);
-        return result;
+
+        return pd.selectByUserIdFiltSport(userId, eventId);
     }
 
     @Override
     public List<Participation> getParticipationByMonth(int userId, int eventId) {
         System.out.println("월 별 대회 참여 기록 조회");
-        List<Participation>result = pd.selectByUserIdFiltSport(userId, eventId);
-        return result;
+        return pd.selectByUserIdFiltMonth(userId, eventId);
 
     }
 
     @Override
     public List<Participation> getParticipationByCity(int userId, int eventId) {
         System.out.println("대회 참여 장소 별 기록 조회");
-        List<Participation>result = pd.selectByUserIdFiltSport(userId, eventId);
-        return result;
+        return pd.selectByUserIdFiltCity(userId, eventId);
     }
 
     @Override

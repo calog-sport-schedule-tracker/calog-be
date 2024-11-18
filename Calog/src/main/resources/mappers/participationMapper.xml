@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calog.model.dao.ParticipationDao">
+    <resultMap id="ParticipationResultMap" type="com.calog.model.dto.Participation">
+        <id property="id" column="id" />
+        <result property="memo" column="memo" />
+        <result property="completionTime" column="completion_time" />
+        <result property="ranking" column="ranking" />
+        <result property="img" column="img" />
+        <result property="eventId" column="event_id" />
+        <result property="userId" column="user_id" />
+    </resultMap>
+
+    <insert id="insertParticipation" parameterType="map">
+        INSERT INTO participation (
+        event_id, user_id
+        <if test="participation.memo != null">, memo</if>
+        <if test="participation.completionTime != null">, completion_time</if>
+        <if test="participation.ranking != null">, ranking</if>
+        <if test="participation.img != null">, img</if>
+        ) VALUES (
+        #{participation.eventId}, #{userId}
+        <if test="participation.memo != null">, #{participation.memo}</if>
+        <if test="participation.completionTime != null">, #{participation.completionTime}</if>
+        <if test="participation.ranking != null">, #{participation.ranking}</if>
+        <if test="participation.img != null">, #{participation.img}</if>
+        )
+    </insert>
+
+    <select id="selectAllByUserId" resultMap="ParticipationResultMap" parameterType="int">
+        SELECT *
+        FROM participation
+        WHERE user_id = #{userId};
+    </select>
+
+    <select id="selectByUserIdFiltSport" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null">
+            AND e.sport = #{sport}
+        </if>
+    </select>
+
+    <select id="selectByUserIdFiltMonth" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="eventDate != null">
+            AND YEAR(e.event_date) = YEAR(#{eventDate})
+            AND MONTH(e.event_date) = MONTH(#{eventDate})
+        </if>
+    </select>
+    <select id="selectByUserIdFiltCity" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="city != null">
+            AND e.city = #{city}
+        </if>
+    </select>
+</mapper>
