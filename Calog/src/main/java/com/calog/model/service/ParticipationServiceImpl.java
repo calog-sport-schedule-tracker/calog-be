@@ -5,7 +5,9 @@ import com.calog.model.dto.Participation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ParticipationServiceImpl implements ParticipationService {
@@ -18,23 +20,47 @@ public class ParticipationServiceImpl implements ParticipationService {
     }
 
     @Override
-    public List<Participation> getParticipationBySport(int userId, int eventId) {
+    public List<Participation> getParticipationBySport(int userId, String sport) {
         System.out.println("대회 종목 별 참여 기록 조회");
 
-        return pd.selectByUserIdFiltSport(userId, eventId);
+        return pd.selectByUserIdFiltSport(userId, sport);
     }
 
     @Override
-    public List<Participation> getParticipationByMonth(int userId, int eventId) {
+    public List<Participation> getParticipationByMonth(int userId, int eventYear, int eventMonth) {
         System.out.println("월 별 대회 참여 기록 조회");
-        return pd.selectByUserIdFiltMonth(userId, eventId);
+        return pd.selectByUserIdFiltMonth(userId, eventYear, eventMonth);
 
     }
 
     @Override
-    public List<Participation> getParticipationByCity(int userId, int eventId) {
+    public List<Participation> getParticipationByCity(int userId, String city) {
         System.out.println("대회 참여 장소 별 기록 조회");
-        return pd.selectByUserIdFiltCity(userId, eventId);
+        return pd.selectByUserIdFiltCity(userId,  city);
+    }
+
+    @Override
+    public List<Participation> getParticipationBySportAndMonth(int userId, String sport, int eventYear, int eventMonth) {
+        System.out.println("대회 참여 종목&날짜 별 기록 조회");
+        return pd.selectByUserIdFiltSportAndMonth(userId,  sport, eventYear, eventMonth);
+    }
+
+    @Override
+    public List<Participation> getParticipationBySportAndCity(int userId, String sport, String city) {
+        System.out.println("대회 참여 종목&도시 별 기록 조회");
+        return pd.selectByUserIdFiltSportAndCity(userId,sport,city);
+    }
+
+    @Override
+    public List<Participation> getParticipationByMonthAndCity(int userId, int eventYear, int eventMonth, String city) {
+        System.out.println("대회 참여 날짜&도시 별 기록 조회");
+        return pd.selectByUserIdFiltMonthAndCity(userId,eventYear,eventMonth,city);
+    }
+
+    @Override
+    public List<Participation> getParticipationBySportAndMonthAndCity(int userId, String sport, int eventYear, int eventMonth, String city ) {
+        System.out.println("대회 참여 종목&날짜&도시 별 기록 조회");
+        return pd.selectByUserIdFiltSportAndMonthAndCity(userId,sport,eventYear,eventMonth,city);
     }
 
     @Override
@@ -45,5 +71,18 @@ public class ParticipationServiceImpl implements ParticipationService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean updateParticipation(int id, Map<String, Object> updates) {
+        if (updates == null || updates.isEmpty()) {
+            return false;
+        }
+        return pd.updateParticipation(id, updates);
+    }
+
+    @Override
+    public boolean deleteParticipation(int id){
+        return pd.deleteParticipation(id);
     }
 }

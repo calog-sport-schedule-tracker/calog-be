@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public boolean logout(User user) {
+        return false;
+    }
+
+    @Override
     public boolean isUserExist(String userId) {
         User result = ud.findById(userId);
         if (result!=null) {

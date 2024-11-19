@@ -29,6 +29,30 @@
         )
     </insert>
 
+    <update id="updateParticipation" parameterType="map">
+        UPDATE participation
+        <set>
+            <if test="updates.img != null">
+                img = #{updates.img},
+            </if>
+            <if test="updates.memo != null">
+                memo = #{updates.memo},
+            </if>
+            <if test="updates.completionTime != null">
+                completion_time = #{updates.completionTime},
+            </if>
+            <if test="updates.ranking != null">
+                ranking = #{updates.ranking},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteParticipation" parameterType="int">
+        DELETE FROM participation
+        WHERE id = #{id}
+    </delete>
+
     <select id="selectAllByUserId" resultMap="ParticipationResultMap" parameterType="int">
         SELECT *
         FROM participation
@@ -40,7 +64,7 @@
         FROM participation p
         JOIN event e ON p.event_id = e.id
         WHERE p.user_id = #{userId}
-        <if test="sport != null">
+        <if test="sport != null and sport != ''">
             AND e.sport = #{sport}
         </if>
     </select>
@@ -50,18 +74,84 @@
         FROM participation p
         JOIN event e ON p.event_id = e.id
         WHERE p.user_id = #{userId}
-        <if test="eventDate != null">
-            AND YEAR(e.event_date) = YEAR(#{eventDate})
-            AND MONTH(e.event_date) = MONTH(#{eventDate})
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
         </if>
     </select>
     <select id="selectByUserIdFiltCity" resultMap="ParticipationResultMap" parameterType="map">
         SELECT p.*
         FROM participation p
-        JOIN event e ON p.event_id = e.id
+        JOIN event e
+        ON p.event_id = e.id
+        INNER JOIN
+        user u
+        ON
+        p.user_id = u.id
         WHERE p.user_id = #{userId}
-        <if test="city != null">
+        <if test="eventId != null">
+            AND e.id = #{eventId}
+        </if>
+        <if test="city != null and eventCity != ''">
             AND e.city = #{city}
         </if>
     </select>
+
+    <select id="selectByUserIdFiltSportAndMonth" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null and sport != ''">
+            AND e.sport = #{sport}
+        </if>
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+    </select>
+    <select id="selectByUserIdFiltSportAndCity" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null and sport != ''">
+            AND e.sport = #{sport}
+        </if>
+        <if test="eventCity != null and eventCity != ''">
+            AND e.city = #{city}
+        </if>
+    </select>
+    <select id="selectByUserIdFiltMonthAndCity" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null and sport != ''">
+            AND e.sport = #{sport}
+        </if>
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+    </select>
+    <select id="selectByUserIdFiltSportAndMonthAndCity" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null">
+            AND e.sport = #{sport}
+        </if>
+        <if test="city != null">
+            AND e.city = #{city}
+        </if>
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+    </select>
+
+
+
 </mapper>
