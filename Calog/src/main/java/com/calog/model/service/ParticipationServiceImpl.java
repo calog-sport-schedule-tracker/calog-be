@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,7 +85,14 @@ public class ParticipationServiceImpl implements ParticipationService {
     @Override
     public boolean updateParticipation(int userId,int id, Map<String, Object> updates) {
         if (updates == null || updates.isEmpty()) {
-            return false;
+            updates = new HashMap<>();
+        }
+
+        if (updates.containsKey("completionTime")) {
+            Object completionTime = updates.get("completionTime");
+            if (completionTime instanceof LocalTime) {
+                updates.put("completionTime", completionTime.toString());
+            }
         }
         return pd.updateParticipation(userId,id, updates);
     }

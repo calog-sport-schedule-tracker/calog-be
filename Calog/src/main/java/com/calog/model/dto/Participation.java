@@ -2,6 +2,7 @@ package com.calog.model.dto;
 
 import org.springframework.cglib.core.Local;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -11,6 +12,8 @@ public class Participation {
     private LocalTime completionTime;
     private Integer ranking;
     private String img;
+
+    private LocalDateTime updatedAt;
     private int eventId;
     private int userId;
 
@@ -61,4 +64,10 @@ public class Participation {
     public void setEventId(int eventId) { this.eventId = eventId; }
     public int getUserId() { return userId; }
     public void setUserId(int userId) { this.userId = userId; }
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

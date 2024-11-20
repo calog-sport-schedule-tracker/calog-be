@@ -9,6 +9,7 @@
         <result property="completionTime" column="completion_time" />
         <result property="ranking" column="ranking" />
         <result property="img" column="img" />
+        <result property="updatedAt" column="updated_at" />
         <result property="eventId" column="event_id" />
         <result property="userId" column="user_id" />
     </resultMap>
@@ -29,9 +30,10 @@
         )
     </insert>
 
-    <update id="updateParticipation" parameterType="map">
+    <update id="updateParticipation">
         UPDATE participation
         <set>
+            updated_at = NOW(),
             <if test="updates.img != null">
                 img = #{updates.img},
             </if>

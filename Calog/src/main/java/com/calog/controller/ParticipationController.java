@@ -171,7 +171,7 @@ public class ParticipationController {
         }
     }
 
-    @PostMapping("/user/{userId}/participation/{id}")
+    @PatchMapping("/user/{userId}/participation/{id}")
     public ResponseEntity<?> updateParticipation(
             @PathVariable("userId")int userId,
             @PathVariable("id") int id,
