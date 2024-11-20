@@ -2,6 +2,7 @@ package com.calog.model.service;
 
 import com.calog.model.dao.ParticipationDao;
 import com.calog.model.dto.Participation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +62,12 @@ public class ParticipationServiceImpl implements ParticipationService {
     public List<Participation> getParticipationBySportAndMonthAndCity(int userId, String sport, int eventYear, int eventMonth, String city ) {
         System.out.println("대회 참여 종목&날짜&도시 별 기록 조회");
         return pd.selectByUserIdFiltSportAndMonthAndCity(userId,sport,eventYear,eventMonth,city);
+    }
+
+    @Override
+    public Participation getOneParticipation(int userId, int id) {
+        System.out.println("참여 기록 하나 조회");
+        return pd.selectParticipationById(userId,id);
     }
 
     @Override

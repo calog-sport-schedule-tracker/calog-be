@@ -13,33 +13,46 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private EventDao ed;
 
-    @Override
-    public List<Event> getAllEventByMonth(Date eventDate) {
-        System.out.println("월별 대회 조회");
-        List<Event>result = ed.selectEventByDate(eventDate);
-        return result;
 
+    @Override
+    public List<Event> getAllEvent() {
+        System.out.println("전체 대회 조회");
+        return ed.selectAllEvent();
     }
 
     @Override
-    public List<Event> getEventByDate(Date eventDate) {
+    public List<Event> getEventByMonth(int eventYear, int eventMonth) {
+        System.out.println("특정 달 대회 조회");
+        return ed.selectEventByMonth(eventYear,eventMonth);
+    }
+
+    @Override
+    public List<Event> getEventBySport(int eventYear, int eventMonth, String sport) {
+        System.out.println("특정 달, 종목 별 대회 조회");
+        return ed.selectEventBySport(eventYear,eventMonth,sport);
+    }
+
+    @Override
+    public List<Event> getEventByCity(int eventYear, int eventMonth, String city) {
+        System.out.println("특정 달, 장소 별 대회 조회");
+        return ed.selectEventByCity(eventYear,eventMonth,city);
+    }
+
+    @Override
+    public List<Event> getEventBySportAndCity(int eventYear, int eventMonth, String sport, String city) {
+        System.out.println("특정 달, 종목과 장소 별 대회 조회");
+        return ed.selectEventBySportAndCity(eventYear,eventMonth,sport,city);
+    }
+
+    @Override
+    public List<Event> getEventByDate(int eventYear, int eventMonth, int eventDay) {
         System.out.println("특정 날짜 대회 조회");
-        List<Event>result = ed.selectEventByDate(eventDate);
-        return result;
+        return ed.selectEventByDate(eventYear,eventMonth,eventDay);
     }
 
     @Override
-    public List<Event> getEventByCity(Date eventDate, String city) {
-        System.out.println("특정 지역 대회 조회");
-        List<Event>result = ed.selectEventByDateFiltCity(eventDate, city);
-
-        return result;
-    }
-
-    @Override
-    public List<Event> getEventBySport(Date eventDate, String sport) {
-        System.out.println("특정 종목 대회 조회");
-        List<Event>result = ed.selectEventByDateFiltSport(eventDate, sport);
-        return result;
+    public Event getOneEvent(int id) {
+        System.out.println("특정 대회 조회");
+        return ed.selectOneEvent(id);
     }
 }

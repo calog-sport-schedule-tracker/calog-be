@@ -33,5 +33,7 @@ public interface ParticipationService {
     //종목&날짜&장소
     public List<Participation> getParticipationBySportAndMonthAndCity(int userId, String sport, int eventYear, int eventMonth, String city);
 
+    public Participation getOneParticipation(int userId, int id);
+
     public boolean deleteParticipation(int id);
 }

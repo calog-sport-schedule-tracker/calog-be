@@ -152,6 +152,13 @@
         </if>
     </select>
 
+    <select id="selectParticipationById" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT *
+        FROM participation
+        WHERE user_id = #{userId}
+        AND id = #{id};
+    </select>
+
 
 
 </mapper>

@@ -28,5 +28,7 @@ public interface ParticipationDao {
 
     List<Participation> selectByUserIdFiltSportAndMonthAndCity(@Param("userId")int userId, @Param("sport")String sport, @Param("eventYear") int eventYear, @Param("eventMonth") int eventMonth, @Param("city") String city );
 
+    Participation selectParticipationById(@Param("userId")int userId, @Param("id")int id);
+
 
 }

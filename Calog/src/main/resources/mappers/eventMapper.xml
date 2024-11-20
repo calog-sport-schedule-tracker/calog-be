@@ -17,7 +17,50 @@
         <result property="img" column="img" />
     </resultMap>
 
+    <select id="selectAllEvent" resultMap="EventResultMap">
+        SELECT *
+        FROM event
+    </select>
 
+    <select id="selectEventByMonth" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+    </select>
 
-
+    <select id="selectEventBySport" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+        AND sport=#{sport}
+    </select>
+    <select id="selectEventByCity" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+        AND city = #{city}
+    </select>
+    <select id="selectEventBySportAndCity" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+        AND sport = #{sport}
+        AND city = #{city}
+    </select>
+    <select id="selectEventByDate" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+        AND DAY(event_date)=#{eventDay}
+    </select>
+    <select id="selectOneEvent" resultMap="EventResultMap" parameterType="int">
+        SELECT *
+        FROM event
+        WHERE id=#{id}
+    </select>
 </mapper>

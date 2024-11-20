@@ -91,7 +91,7 @@ public class ParticipationController {
 
     }
 
-    @GetMapping("/{userId}/participation/sportCity")
+    @GetMapping("/user/{userId}/participation/sportCity")
     public ResponseEntity<?> getListBySportAndCity(
             @PathVariable("userId") int userId,
             @RequestParam(value = "sport", required = false) String sport,
@@ -127,7 +127,7 @@ public class ParticipationController {
         }
         return ResponseEntity.ok(result);
     }
-    @GetMapping("/{userId}/participation/sportDateCity")
+    @GetMapping("/user/{userId}/participation/sportDateCity")
     public ResponseEntity<?> getParticipationBySportAndDateAndCity(
             @PathVariable("userId") int userId,
             @RequestParam(value = "sport", required = false) String sport,
@@ -195,6 +195,16 @@ public class ParticipationController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Participation not found or failed to delete");
         }
+    }
+
+    @GetMapping("/user/{userId}/participation/{id}")
+    public ResponseEntity<?>getOneParticipation(@PathVariable("userId")int userId, @PathVariable("id")int id){
+        Participation result = participationService.getOneParticipation(userId,id);
+
+        if (result!=null){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.noContent().build();
     }
 
 
