@@ -35,6 +35,8 @@ public class EventController {
             eventYear = Integer.parseInt(parts[0]);
             eventMonth = Integer.parseInt(parts[1]);
         }
+        System.out.println(eventYear);
+        System.out.println(eventMonth);
         List<Event>result = es.getEventByMonth(eventYear,eventMonth);
         if (result.size()==0)
         {

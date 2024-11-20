@@ -12,8 +12,8 @@ import java.util.Map;
 @Mapper
 public interface ParticipationDao {
     boolean insertParticipation(@Param("participation") Participation participation, @Param("userId") int userId);
-    boolean updateParticipation(@Param("id") int id, @Param("updates") Map<String, Object> updates);
-    boolean deleteParticipation(@Param("id") int id);
+    boolean updateParticipation(@Param("userId") int userId,@Param("id") int id, @Param("updates") Map<String, Object> updates);
+    boolean deleteParticipation(@Param("userId")int userId, @Param("id") int id);
 
 
     List<Participation> selectAllByUserId(int userId);

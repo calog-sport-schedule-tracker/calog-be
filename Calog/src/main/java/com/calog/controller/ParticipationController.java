@@ -60,6 +60,7 @@ public class ParticipationController {
                                           @RequestParam(value = "city", required = false) String city){
 
         List<Participation> result = participationService.getParticipationByCity(userId,city);
+
         if (result.size()==0)
         {
             return ResponseEntity.noContent().build();
@@ -105,7 +106,7 @@ public class ParticipationController {
         }
         return ResponseEntity.ok(result);
     }
-    @GetMapping("/{userId}/participation/dateCity")
+    @GetMapping("/user/{userId}/participation/dateCity")
     public ResponseEntity<?> getListByDateAndCity(
             @PathVariable("userId") int userId,
             @RequestParam(value = "eventDate", required = false) String eventDate,
@@ -170,13 +171,14 @@ public class ParticipationController {
         }
     }
 
-    @PatchMapping("/participation/{id}")
+    @PostMapping("/user/{userId}/participation/{id}")
     public ResponseEntity<?> updateParticipation(
+            @PathVariable("userId")int userId,
             @PathVariable("id") int id,
             @RequestBody Map<String, Object> updates
     ) {
-        // Service 호출
-        boolean isUpdated = participationService.updateParticipation(id, updates);
+
+        boolean isUpdated = participationService.updateParticipation(userId,id, updates);
 
         if (isUpdated) {
             return ResponseEntity.ok("Participation successfully updated");
@@ -185,16 +187,17 @@ public class ParticipationController {
         }
     }
 
-    @DeleteMapping("/participation/{id}")
-    public ResponseEntity<?> deleteParticipation(@PathVariable("id") int id) {
-        // Service 호출
-        boolean isDeleted = participationService.deleteParticipation(id);
+    @DeleteMapping("/user/{userId}/participation/{id}")
+    public ResponseEntity<?> deleteParticipation(@PathVariable("userId")int userId,@PathVariable("id") int id) {
+
+        boolean isDeleted = participationService.deleteParticipation(userId,id);
 
         if (isDeleted) {
             return ResponseEntity.ok("Participation successfully deleted");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Participation not found or failed to delete");
         }
+
     }
 
     @GetMapping("/user/{userId}/participation/{id}")

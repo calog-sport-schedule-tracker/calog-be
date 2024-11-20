@@ -1,12 +1,13 @@
 package com.calog.model.dto;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 public class ParticipationRequest {
     private int userId; // 필수
     private int eventId; // 필수
     private String record; // 선택
-    private Date completionTime; // 선택
+    private LocalTime completionTime; // 선택
     private Integer ranking; // 선택
     private String img; // 선택
 
@@ -35,11 +36,11 @@ public class ParticipationRequest {
         this.record = record;
     }
 
-    public Date getCompletionTime() {
+    public LocalTime getCompletionTime() {
         return completionTime;
     }
 
-    public void setCompletionTime(Date completionTime) {
+    public void setCompletionTime(LocalTime completionTime) {
         this.completionTime = completionTime;
     }
 

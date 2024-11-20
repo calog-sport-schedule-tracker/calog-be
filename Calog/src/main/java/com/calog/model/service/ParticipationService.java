@@ -10,7 +10,7 @@ public interface ParticipationService {
 
     public boolean writeParticipation(Participation participation, int userId);
 
-    public boolean updateParticipation(int id, Map<String, Object> updates);
+    public boolean updateParticipation(int userId,int id, Map<String, Object> updates);
     public List<Participation> getAllParticipationByUserId(int userId);
 
     //종목별
@@ -35,5 +35,5 @@ public interface ParticipationService {
 
     public Participation getOneParticipation(int userId, int id);
 
-    public boolean deleteParticipation(int id);
+    public boolean deleteParticipation(int userId,int id);
 }

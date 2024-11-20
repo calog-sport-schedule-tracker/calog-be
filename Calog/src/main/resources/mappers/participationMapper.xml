@@ -46,11 +46,14 @@
             </if>
         </set>
         WHERE id = #{id}
+        AND user_id = #{userId}
     </update>
 
-    <delete id="deleteParticipation" parameterType="int">
+
+    <delete id="deleteParticipation" parameterType="map">
         DELETE FROM participation
         WHERE id = #{id}
+        AND user_id = #{userId}
     </delete>
 
     <select id="selectAllByUserId" resultMap="ParticipationResultMap" parameterType="int">
@@ -82,17 +85,9 @@
     <select id="selectByUserIdFiltCity" resultMap="ParticipationResultMap" parameterType="map">
         SELECT p.*
         FROM participation p
-        JOIN event e
-        ON p.event_id = e.id
-        INNER JOIN
-        user u
-        ON
-        p.user_id = u.id
+        JOIN event e ON p.event_id = e.id
         WHERE p.user_id = #{userId}
-        <if test="eventId != null">
-            AND e.id = #{eventId}
-        </if>
-        <if test="city != null and eventCity != ''">
+        <if test="city != null and city != ''">
             AND e.city = #{city}
         </if>
     </select>
@@ -118,7 +113,7 @@
         <if test="sport != null and sport != ''">
             AND e.sport = #{sport}
         </if>
-        <if test="eventCity != null and eventCity != ''">
+        <if test="city != null and city != ''">
             AND e.city = #{city}
         </if>
     </select>
@@ -127,12 +122,12 @@
         FROM participation p
         JOIN event e ON p.event_id = e.id
         WHERE p.user_id = #{userId}
-        <if test="sport != null and sport != ''">
-            AND e.sport = #{sport}
-        </if>
         <if test="eventYear != null and eventMonth != null">
             AND YEAR(e.event_date) = #{eventYear}
             AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+        <if test="city != null and city != ''">
+            AND e.city = #{city}
         </if>
     </select>
     <select id="selectByUserIdFiltSportAndMonthAndCity" resultMap="ParticipationResultMap" parameterType="map">

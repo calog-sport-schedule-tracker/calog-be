@@ -8,7 +8,7 @@
         VALUES (#{userId}, #{userPw},#{nickname})
     </insert>
 
-    <select id="findById" resultType="User" parameterType="int">
+    <select id="findById" resultType="User" parameterType="String">
         SELECT *
         FROM user
         WHERE user_id = #{userId};

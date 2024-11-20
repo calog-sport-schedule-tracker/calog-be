@@ -81,15 +81,15 @@ public class ParticipationServiceImpl implements ParticipationService {
     }
 
     @Override
-    public boolean updateParticipation(int id, Map<String, Object> updates) {
+    public boolean updateParticipation(int userId,int id, Map<String, Object> updates) {
         if (updates == null || updates.isEmpty()) {
             return false;
         }
-        return pd.updateParticipation(id, updates);
+        return pd.updateParticipation(userId,id, updates);
     }
 
     @Override
-    public boolean deleteParticipation(int id){
-        return pd.deleteParticipation(id);
+    public boolean deleteParticipation(int userId,int id){
+        return pd.deleteParticipation(userId,id);
     }
 }
