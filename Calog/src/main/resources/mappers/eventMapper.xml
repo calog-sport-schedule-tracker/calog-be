@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calog.model.dao.EventDao">
+
+
+    <resultMap id="EventResultMap" type="com.calog.model.dto.Event">
+        <id property="id" column="id" />
+        <result property="eventName" column="event_name" />
+        <result property="sport" column="sport" />
+        <result property="eventDate" column="event_date" />
+        <result property="address" column="address" />
+        <result property="city" column="city" />
+        <result property="registrationStart" column="registration_start" />
+        <result property="registrationDeadline" column="registration_deadline" />
+        <result property="img" column="img" />
+    </resultMap>
+
+    <select id="selectAllEvent" resultMap="EventResultMap">
+        SELECT *
+        FROM event
+    </select>
+
+    <select id="selectEventByMonth" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+    </select>
+
+    <select id="selectEventBySport" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+        AND sport=#{sport}
+    </select>
+    <select id="selectEventByCity" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+        AND city = #{city}
+    </select>
+    <select id="selectEventBySportAndCity" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+        AND sport = #{sport}
+        AND city = #{city}
+    </select>
+    <select id="selectEventByDate" resultMap="EventResultMap" parameterType="map">
+        SELECT *
+        FROM event
+        WHERE YEAR(event_date)=#{eventYear}
+        AND MONTH(event_date)=#{eventMonth}
+        AND DAY(event_date)=#{eventDay}
+    </select>
+    <select id="selectOneEvent" resultMap="EventResultMap" parameterType="int">
+        SELECT *
+        FROM event
+        WHERE id=#{id}
+    </select>
+</mapper>

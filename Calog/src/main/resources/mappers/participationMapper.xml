@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calog.model.dao.ParticipationDao">
+    <resultMap id="ParticipationResultMap" type="com.calog.model.dto.Participation">
+        <id property="id" column="id" />
+        <result property="memo" column="memo" />
+        <result property="completionTime" column="completion_time" />
+        <result property="ranking" column="ranking" />
+        <result property="img" column="img" />
+        <result property="updatedAt" column="updated_at" />
+        <result property="eventId" column="event_id" />
+        <result property="userId" column="user_id" />
+    </resultMap>
+
+    <insert id="insertParticipation" parameterType="map">
+        INSERT INTO participation (
+        event_id, user_id
+        <if test="participation.memo != null">, memo</if>
+        <if test="participation.completionTime != null">, completion_time</if>
+        <if test="participation.ranking != null">, ranking</if>
+        <if test="participation.img != null">, img</if>
+        ) VALUES (
+        #{participation.eventId}, #{userId}
+        <if test="participation.memo != null">, #{participation.memo}</if>
+        <if test="participation.completionTime != null">, #{participation.completionTime}</if>
+        <if test="participation.ranking != null">, #{participation.ranking}</if>
+        <if test="participation.img != null">, #{participation.img}</if>
+        )
+    </insert>
+
+    <update id="updateParticipation">
+        UPDATE participation
+        <set>
+            updated_at = NOW(),
+            <if test="updates.img != null">
+                img = #{updates.img},
+            </if>
+            <if test="updates.memo != null">
+                memo = #{updates.memo},
+            </if>
+            <if test="updates.completionTime != null">
+                completion_time = #{updates.completionTime},
+            </if>
+            <if test="updates.ranking != null">
+                ranking = #{updates.ranking},
+            </if>
+        </set>
+        WHERE id = #{id}
+        AND user_id = #{userId}
+    </update>
+
+
+    <delete id="deleteParticipation" parameterType="map">
+        DELETE FROM participation
+        WHERE id = #{id}
+        AND user_id = #{userId}
+    </delete>
+
+    <select id="selectAllByUserId" resultMap="ParticipationResultMap" parameterType="int">
+        SELECT *
+        FROM participation
+        WHERE user_id = #{userId};
+    </select>
+
+    <select id="selectByUserIdFiltSport" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null and sport != ''">
+            AND e.sport = #{sport}
+        </if>
+    </select>
+
+    <select id="selectByUserIdFiltMonth" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+    </select>
+    <select id="selectByUserIdFiltCity" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="city != null and city != ''">
+            AND e.city = #{city}
+        </if>
+    </select>
+
+    <select id="selectByUserIdFiltSportAndMonth" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null and sport != ''">
+            AND e.sport = #{sport}
+        </if>
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+    </select>
+    <select id="selectByUserIdFiltSportAndCity" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null and sport != ''">
+            AND e.sport = #{sport}
+        </if>
+        <if test="city != null and city != ''">
+            AND e.city = #{city}
+        </if>
+    </select>
+    <select id="selectByUserIdFiltMonthAndCity" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+        <if test="city != null and city != ''">
+            AND e.city = #{city}
+        </if>
+    </select>
+    <select id="selectByUserIdFiltSportAndMonthAndCity" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null">
+            AND e.sport = #{sport}
+        </if>
+        <if test="city != null">
+            AND e.city = #{city}
+        </if>
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+    </select>
+
+    <select id="selectParticipationById" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT *
+        FROM participation
+        WHERE user_id = #{userId}
+        AND id = #{id};
+    </select>
+
+
+
+</mapper>
