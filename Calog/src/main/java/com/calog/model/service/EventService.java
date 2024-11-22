@@ -1,5 +1,6 @@
 package com.calog.model.service;
 
+import com.calog.model.dto.Detail;
 import com.calog.model.dto.Event;
 
 import java.util.Date;
@@ -13,6 +14,7 @@ public interface EventService {
     public List<Event>getEventBySportAndCity( String sport, String city);
     public List<Event>getEventByDate(int eventYear, int eventMonth, int eventDay);
     public Event getOneEvent(int id);
+
 
 
 }

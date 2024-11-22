@@ -1,6 +1,8 @@
 package com.calog.model.service;
 
+import com.calog.model.dao.DetailDao;
 import com.calog.model.dao.EventDao;
+import com.calog.model.dto.Detail;
 import com.calog.model.dto.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.List;
 public class EventServiceImpl implements EventService {
     @Autowired
     private EventDao ed;
+
 
 
     @Override
@@ -55,4 +58,6 @@ public class EventServiceImpl implements EventService {
         System.out.println("특정 대회 조회");
         return ed.selectOneEvent(id);
     }
+
+
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calog.model.dao.DetailDao">
+
+
+    <resultMap id="DetailResultMap" type="com.calog.model.dto.Detail">
+        <id property="id" column="id" />
+        <result property="category" column="category" />
+        <result property="eventId" column="event_id" />
+    </resultMap>
+
+
+    <select id="selectAllDetail" resultMap="DetailResultMap" parameterType="int">
+        SELECT *
+        FROM detail
+        WHERE event_id = #{eventId}
+    </select>
+
+</mapper>

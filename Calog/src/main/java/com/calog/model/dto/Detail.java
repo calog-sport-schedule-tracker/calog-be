@@ -1,5 +1,6 @@
 package com.calog.model.dto;
 
+
 public class Detail {
     private int id;
     private String category;
