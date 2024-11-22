@@ -164,7 +164,8 @@ public class ParticipationController {
         participation.setCompletionTime(request.getCompletionTime());
         participation.setRanking(request.getRanking());
         participation.setImg(request.getImg());
-        participation.setUpdatedAt(LocalDateTime.now()); // updatedAt 필드 설정 (현재 시간)
+        participation.setDetail(request.getDetail());
+        participation.setUpdatedAt(LocalDateTime.now());
 
         boolean isCreated = participationService.writeParticipation(participation, request.getUserId());
         if (isCreated) {

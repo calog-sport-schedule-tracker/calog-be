@@ -10,8 +10,10 @@ public class ParticipationRequest {
     private LocalTime completionTime; // 선택
     private Integer ranking; // 선택
     private String img; // 선택
+    private String detail;
 
-    // Getters and Setters
+
+
     public int getUserId() {
         return userId;
     }
@@ -59,4 +61,6 @@ public class ParticipationRequest {
     public void setImg(String img) {
         this.img = img;
     }
+    public String getDetail() { return detail; }
+    public void setDetail(String detail) { this.detail = detail; }
 }
