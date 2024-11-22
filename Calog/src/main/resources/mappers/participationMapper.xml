@@ -10,6 +10,7 @@
         <result property="ranking" column="ranking" />
         <result property="img" column="img" />
         <result property="updatedAt" column="updated_at" />
+        <result property="detail" column="detail"/>
         <result property="eventId" column="event_id" />
         <result property="userId" column="user_id" />
     </resultMap>
@@ -21,12 +22,14 @@
         <if test="participation.completionTime != null">, completion_time</if>
         <if test="participation.ranking != null">, ranking</if>
         <if test="participation.img != null">, img</if>
+        <if test="participation.detail != null">, detail</if>
         ) VALUES (
         #{participation.eventId}, #{userId}
         <if test="participation.memo != null">, #{participation.memo}</if>
         <if test="participation.completionTime != null">, #{participation.completionTime}</if>
         <if test="participation.ranking != null">, #{participation.ranking}</if>
         <if test="participation.img != null">, #{participation.img}</if>
+        <if test="participation.detail != null">, #{participation.detail}</if>
         )
     </insert>
 
