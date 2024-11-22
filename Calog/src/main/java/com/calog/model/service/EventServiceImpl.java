@@ -27,21 +27,21 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getEventBySport(int eventYear, int eventMonth, String sport) {
+    public List<Event> getEventBySport(String sport) {
         System.out.println("특정 달, 종목 별 대회 조회");
-        return ed.selectEventBySport(eventYear,eventMonth,sport);
+        return ed.selectEventBySport(sport);
     }
 
     @Override
-    public List<Event> getEventByCity(int eventYear, int eventMonth, String city) {
+    public List<Event> getEventByCity( String city) {
         System.out.println("특정 달, 장소 별 대회 조회");
-        return ed.selectEventByCity(eventYear,eventMonth,city);
+        return ed.selectEventByCity(city);
     }
 
     @Override
-    public List<Event> getEventBySportAndCity(int eventYear, int eventMonth, String sport, String city) {
+    public List<Event> getEventBySportAndCity(String sport, String city) {
         System.out.println("특정 달, 종목과 장소 별 대회 조회");
-        return ed.selectEventBySportAndCity(eventYear,eventMonth,sport,city);
+        return ed.selectEventBySportAndCity(sport,city);
     }
 
     @Override

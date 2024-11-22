@@ -48,15 +48,9 @@ public class EventController {
 
 
     @GetMapping("/sport")
-    public ResponseEntity<?>getEventBySport(@RequestParam(value = "eventDate", required = false) String eventDate,@RequestParam(value = "sport", required = false) String sport){
-        Integer eventYear = null;
-        Integer eventMonth = null;
-        if (eventDate != null && !eventDate.isEmpty()) {
-            String[] parts = eventDate.split("-");
-            eventYear = Integer.parseInt(parts[0]);
-            eventMonth = Integer.parseInt(parts[1]);
-        }
-        List<Event>result = es.getEventBySport(eventYear,eventMonth,sport);
+    public ResponseEntity<?>getEventBySport(@RequestParam(value = "sport", required = false) String sport){
+
+        List<Event>result = es.getEventBySport(sport);
         if (result.size()==0)
         {
             return ResponseEntity.noContent().build();
@@ -65,15 +59,10 @@ public class EventController {
     }
 
     @GetMapping("/city")
-    public ResponseEntity<?>getEventByCity(@RequestParam(value = "eventDate", required = false) String eventDate,@RequestParam(value = "city", required = false) String city){
-        Integer eventYear = null;
-        Integer eventMonth = null;
-        if (eventDate != null && !eventDate.isEmpty()) {
-            String[] parts = eventDate.split("-");
-            eventYear = Integer.parseInt(parts[0]);
-            eventMonth = Integer.parseInt(parts[1]);
-        }
-        List<Event>result = es.getEventByCity(eventYear,eventMonth,city);
+    public ResponseEntity<?>getEventByCity(@RequestParam(value = "city", required = false) String city){
+
+
+        List<Event>result = es.getEventByCity(city);
         if (result.size()==0)
         {
             return ResponseEntity.noContent().build();
@@ -82,15 +71,9 @@ public class EventController {
     }
 
     @GetMapping("/sportCity")
-    public ResponseEntity<?>getEventBySportAndCity(@RequestParam(value = "eventDate", required = false) String eventDate,@RequestParam(value = "sport", required = false) String sport,@RequestParam(value = "city", required = false) String city){
-        Integer eventYear = null;
-        Integer eventMonth = null;
-        if (eventDate != null && !eventDate.isEmpty()) {
-            String[] parts = eventDate.split("-");
-            eventYear = Integer.parseInt(parts[0]);
-            eventMonth = Integer.parseInt(parts[1]);
-        }
-        List<Event>result = es.getEventBySportAndCity(eventYear,eventMonth,sport,city);
+    public ResponseEntity<?>getEventBySportAndCity(@RequestParam(value = "sport", required = false) String sport,@RequestParam(value = "city", required = false) String city){
+
+        List<Event>result = es.getEventBySportAndCity(sport,city);
         if (result.size()==0)
         {
             return ResponseEntity.noContent().build();
