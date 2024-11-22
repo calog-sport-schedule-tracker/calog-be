@@ -29,26 +29,21 @@
         AND MONTH(event_date)=#{eventMonth}
     </select>
 
-    <select id="selectEventBySport" resultMap="EventResultMap" parameterType="map">
+    <select id="selectEventBySport" resultMap="EventResultMap" parameterType="String">
         SELECT *
         FROM event
-        WHERE YEAR(event_date)=#{eventYear}
-        AND MONTH(event_date)=#{eventMonth}
-        AND sport=#{sport}
+        WHERE
+        sport=#{sport}
     </select>
-    <select id="selectEventByCity" resultMap="EventResultMap" parameterType="map">
+    <select id="selectEventByCity" resultMap="EventResultMap" parameterType="String">
         SELECT *
         FROM event
-        WHERE YEAR(event_date)=#{eventYear}
-        AND MONTH(event_date)=#{eventMonth}
-        AND city = #{city}
+        WHERE city = #{city}
     </select>
     <select id="selectEventBySportAndCity" resultMap="EventResultMap" parameterType="map">
         SELECT *
         FROM event
-        WHERE YEAR(event_date)=#{eventYear}
-        AND MONTH(event_date)=#{eventMonth}
-        AND sport = #{sport}
+        WHERE sport = #{sport}
         AND city = #{city}
     </select>
     <select id="selectEventByDate" resultMap="EventResultMap" parameterType="map">
