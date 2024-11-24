@@ -46,18 +46,14 @@ public class SecurityConfig {
         http
                 .httpBasic((auth)-> auth.disable());
 
-        //인가 작업. 로그인, 회원가입,event 부분은 누구나 다 접근 가능하고, 이외는 로그인 해야만 가능
+        //인가 작업. 
         http
                 .authorizeHttpRequests(auth -> auth
                         //여기는 로그인 안해도 접근가능한 path넣기
-                        .requestMatchers("/api/login", "/api/join").permitAll()
-                        .requestMatchers("/api/event/**","/api/detail/**","api/user/**","/api/participation/**", "/**").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 );
-        http
-                .addFilterBefore(new JWTFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil),
-                        UsernamePasswordAuthenticationFilter.class);
+
+
 
 
 
