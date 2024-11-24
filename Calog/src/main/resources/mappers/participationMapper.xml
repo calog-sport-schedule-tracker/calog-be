@@ -37,9 +37,6 @@
         UPDATE participation
         <set>
             updated_at = NOW(),
-            <if test="updates.eventId != null">
-                event_id = #{updates.eventId},
-            </if>
             <if test="updates.memo != null">
                 memo = #{updates.memo},
             </if>
