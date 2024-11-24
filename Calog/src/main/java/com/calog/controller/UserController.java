@@ -51,7 +51,7 @@ public class UserController {
 
 //            //설정한 쿠키를 HTTP 응답에 추가하여 클라이언트에게 전송
             response.addCookie(cookie);
-           return ResponseEntity.status(HttpStatus.OK).body("User Logined");
+           return ResponseEntity.status(HttpStatus.OK).body(user);
        } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failed: 다시 로그인하세요");
         }
