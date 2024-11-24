@@ -1,6 +1,7 @@
 package com.calog.model.dao;
 
 import com.calog.model.dto.Participation;
+import com.calog.model.dto.ParticipationRequest;
 import com.calog.model.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +13,7 @@ import java.util.Map;
 @Mapper
 public interface ParticipationDao {
     boolean insertParticipation(@Param("participation") Participation participation, @Param("userId") int userId);
-    boolean updateParticipation(@Param("userId") int userId,@Param("id") int id, @Param("updates") Map<String, Object> updates);
+    boolean updateParticipation(@Param("userId") int userId,@Param("id") int id,@Param("updates") ParticipationRequest updates);
     boolean deleteParticipation(@Param("userId")int userId, @Param("id") int id);
 
 

@@ -37,8 +37,8 @@
         UPDATE participation
         <set>
             updated_at = NOW(),
-            <if test="updates.img != null">
-                img = #{updates.img},
+            <if test="updates.eventId != null">
+                event_id = #{updates.eventId},
             </if>
             <if test="updates.memo != null">
                 memo = #{updates.memo},
@@ -49,10 +49,18 @@
             <if test="updates.ranking != null">
                 ranking = #{updates.ranking},
             </if>
+            <if test="updates.img != null">
+                img = #{updates.img},
+            </if>
+            <if test="updates.detail != null">
+                detail = #{updates.detail},
+            </if>
         </set>
         WHERE id = #{id}
-        AND user_id = #{userId}
+        AND user_id = #{userId};
     </update>
+
+
 
 
     <delete id="deleteParticipation" parameterType="map">

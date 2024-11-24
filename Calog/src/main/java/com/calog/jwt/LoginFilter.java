@@ -33,7 +33,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
             String userId = loginData.get("userId");
             String userPw = loginData.get("userPw");
-            String nickname = loginData.get("nickname"); // 추가적으로 사용 가능
+            String nickname = loginData.get("nickname");
             System.out.println(nickname);
 
             UsernamePasswordAuthenticationToken authenticationToken =

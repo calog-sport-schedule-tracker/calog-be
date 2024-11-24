@@ -51,7 +51,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         //여기는 로그인 안해도 접근가능한 path넣기
                         .requestMatchers("/api/login", "/api/join").permitAll()
-                        .requestMatchers("/api/event/**","/api/detail/**","api/user/**","/api/participation/**").permitAll()
+                        .requestMatchers("/api/event/**","/api/detail/**","api/user/**","/api/participation/**", "/**").permitAll()
                         .anyRequest().authenticated()
                 );
         http
