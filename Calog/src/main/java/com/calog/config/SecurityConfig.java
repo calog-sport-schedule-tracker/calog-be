@@ -13,6 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -32,6 +34,16 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
     @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*");
+            }
+        };
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         // CSRF 비활성화
         http.csrf(csrf -> csrf.disable());
@@ -46,7 +58,7 @@ public class SecurityConfig {
         http
                 .httpBasic((auth)-> auth.disable());
 
-        //인가 작업. 
+        //인가 작업.
         http
                 .authorizeHttpRequests(auth -> auth
                         //여기는 로그인 안해도 접근가능한 path넣기
