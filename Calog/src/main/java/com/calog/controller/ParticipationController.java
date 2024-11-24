@@ -160,7 +160,7 @@ public class ParticipationController {
         Participation participation = new Participation();
         participation.setUserId(request.getUserId());
         participation.setEventId(request.getEventId());
-        participation.setMemo(request.getRecord());
+        participation.setMemo(request.getMemo());
         participation.setCompletionTime(request.getCompletionTime());
         participation.setRanking(request.getRanking());
         participation.setImg(request.getImg());
@@ -179,7 +179,7 @@ public class ParticipationController {
     public ResponseEntity<?> updateParticipation(
             @PathVariable("userId")int userId,
             @PathVariable("id") int id,
-            @RequestBody Map<String, Object> updates
+            @RequestBody ParticipationRequest updates
     ) {
 
         boolean isUpdated = participationService.updateParticipation(userId,id, updates);

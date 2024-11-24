@@ -2,6 +2,7 @@ package com.calog.model.service;
 
 import com.calog.model.dao.ParticipationDao;
 import com.calog.model.dto.Participation;
+import com.calog.model.dto.ParticipationRequest;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,20 +83,11 @@ public class ParticipationServiceImpl implements ParticipationService {
         return false;
     }
 
-    @Override
-    public boolean updateParticipation(int userId,int id, Map<String, Object> updates) {
-        if (updates == null || updates.isEmpty()) {
-            updates = new HashMap<>();
-        }
-
-        if (updates.containsKey("completionTime")) {
-            Object completionTime = updates.get("completionTime");
-            if (completionTime instanceof LocalTime) {
-                updates.put("completionTime", completionTime.toString());
-            }
-        }
-        return pd.updateParticipation(userId,id, updates);
+    public boolean updateParticipation(int userId, int id, ParticipationRequest updates) {
+        return pd.updateParticipation(userId, id, updates);
     }
+
+
 
     @Override
     public boolean deleteParticipation(int userId,int id){

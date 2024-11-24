@@ -1,19 +1,17 @@
 package com.calog.model.dto;
 
 import java.time.LocalTime;
-import java.util.Date;
 
 public class ParticipationRequest {
     private int userId; // 필수
     private int eventId; // 필수
-    private String record; // 선택
+    private String memo; // 선택
     private LocalTime completionTime; // 선택
     private Integer ranking; // 선택
     private String img; // 선택
-    private String detail;
+    private String detail; // 선택
 
-
-
+    // Getter와 Setter
     public int getUserId() {
         return userId;
     }
@@ -30,12 +28,12 @@ public class ParticipationRequest {
         this.eventId = eventId;
     }
 
-    public String getRecord() {
-        return record;
+    public String getMemo() {
+        return memo;
     }
 
-    public void setRecord(String record) {
-        this.record = record;
+    public void setMemo(String memo) { // setter 이름 수정
+        this.memo = memo;
     }
 
     public LocalTime getCompletionTime() {
@@ -61,6 +59,12 @@ public class ParticipationRequest {
     public void setImg(String img) {
         this.img = img;
     }
-    public String getDetail() { return detail; }
-    public void setDetail(String detail) { this.detail = detail; }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
 }
