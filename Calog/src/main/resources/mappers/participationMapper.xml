@@ -68,8 +68,18 @@
 
     <select id="selectAllByUserId" resultMap="ParticipationResultMap" parameterType="int">
         SELECT *
-        FROM participation
-        WHERE user_id = #{userId};
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE user_id = #{userId}
+        ORDER BY e.event_date;
+    </select>
+
+    <select id="selectAllByUserId2" resultMap="ParticipationResultMap" parameterType="int">
+        SELECT *
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE user_id = #{userId}
+        ORDER BY e.event_date DESC;
     </select>
 
     <select id="selectByUserIdFiltSport" resultMap="ParticipationResultMap" parameterType="map">
@@ -80,6 +90,17 @@
         <if test="sport != null and sport != ''">
             AND e.sport = #{sport}
         </if>
+        ORDER BY e.event_date;
+    </select>
+    <select id="selectByUserIdFiltSport2" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null and sport != ''">
+            AND e.sport = #{sport}
+        </if>
+        ORDER BY e.event_date DESC;
     </select>
 
     <select id="selectByUserIdFiltMonth" resultMap="ParticipationResultMap" parameterType="map">
@@ -91,6 +112,18 @@
             AND YEAR(e.event_date) = #{eventYear}
             AND MONTH(e.event_date) = #{eventMonth}
         </if>
+        ORDER BY e.event_date;
+    </select>
+    <select id="selectByUserIdFiltMonth2" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+        ORDER BY e.event_date DESC;
     </select>
     <select id="selectByUserIdFiltCity" resultMap="ParticipationResultMap" parameterType="map">
         SELECT p.*
@@ -100,6 +133,17 @@
         <if test="city != null and city != ''">
             AND e.city = #{city}
         </if>
+        ORDER BY e.event_date;
+    </select>
+    <select id="selectByUserIdFiltCity" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="city != null and city != ''">
+            AND e.city = #{city}
+        </if>
+        ORDER BY e.event_date DESC;
     </select>
 
     <select id="selectByUserIdFiltSportAndMonth" resultMap="ParticipationResultMap" parameterType="map">
@@ -114,6 +158,21 @@
             AND YEAR(e.event_date) = #{eventYear}
             AND MONTH(e.event_date) = #{eventMonth}
         </if>
+        ORDER BY e.event_date;
+    </select>
+    <select id="selectByUserIdFiltSportAndMonth2" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null and sport != ''">
+            AND e.sport = #{sport}
+        </if>
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+        ORDER BY e.event_date DESC;
     </select>
     <select id="selectByUserIdFiltSportAndCity" resultMap="ParticipationResultMap" parameterType="map">
         SELECT p.*
@@ -126,6 +185,20 @@
         <if test="city != null and city != ''">
             AND e.city = #{city}
         </if>
+        ORDER BY e.event_date;
+    </select>
+    <select id="selectByUserIdFiltSportAndCity2" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null and sport != ''">
+            AND e.sport = #{sport}
+        </if>
+        <if test="city != null and city != ''">
+            AND e.city = #{city}
+        </if>
+        ORDER BY e.event_date DESC;
     </select>
     <select id="selectByUserIdFiltMonthAndCity" resultMap="ParticipationResultMap" parameterType="map">
         SELECT p.*
@@ -139,6 +212,21 @@
         <if test="city != null and city != ''">
             AND e.city = #{city}
         </if>
+        ORDER BY e.event_date;
+    </select>
+    <select id="selectByUserIdFiltMonthAndCity2" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+        <if test="city != null and city != ''">
+            AND e.city = #{city}
+        </if>
+        ORDER BY e.event_date DESC;
     </select>
     <select id="selectByUserIdFiltSportAndMonthAndCity" resultMap="ParticipationResultMap" parameterType="map">
         SELECT p.*
@@ -155,6 +243,24 @@
             AND YEAR(e.event_date) = #{eventYear}
             AND MONTH(e.event_date) = #{eventMonth}
         </if>
+        ORDER BY e.event_date;
+    </select>
+    <select id="selectByUserIdFiltSportAndMonthAndCity2" resultMap="ParticipationResultMap" parameterType="map">
+        SELECT p.*
+        FROM participation p
+        JOIN event e ON p.event_id = e.id
+        WHERE p.user_id = #{userId}
+        <if test="sport != null">
+            AND e.sport = #{sport}
+        </if>
+        <if test="city != null">
+            AND e.city = #{city}
+        </if>
+        <if test="eventYear != null and eventMonth != null">
+            AND YEAR(e.event_date) = #{eventYear}
+            AND MONTH(e.event_date) = #{eventMonth}
+        </if>
+        ORDER BY e.event_date DESC;
     </select>
 
     <select id="selectParticipationById" resultMap="ParticipationResultMap" parameterType="map">
