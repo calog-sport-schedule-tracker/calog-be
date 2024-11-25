@@ -13,26 +13,34 @@ public interface ParticipationService {
 
     public boolean updateParticipation(int userId, int id, ParticipationRequest updates);
     public List<Participation> getAllParticipationByUserId(int userId);
+    public List<Participation> getAllParticipationByUserId2(int userId);
 
     //종목별
     public List<Participation> getParticipationBySport(int userId, String sport);
+    public List<Participation> getParticipationBySport2(int userId, String sport);
 
     //날짜별
     public List<Participation> getParticipationByMonth(int userId,  int eventYear, int eventMonth);
+    public List<Participation> getParticipationByMonth2(int userId,  int eventYear, int eventMonth);
 
     //장소별
     public List<Participation> getParticipationByCity(int userId,  String city);
+    public List<Participation> getParticipationByCity2(int userId,  String city);
 
     //종목&날짜
     public List<Participation> getParticipationBySportAndMonth(int userId,  String sport,int eventYear, int eventMonth);
+    public List<Participation> getParticipationBySportAndMonth2(int userId,  String sport,int eventYear, int eventMonth);
 
     //종목&장소
     public List<Participation> getParticipationBySportAndCity(int userId, String sport, String city);
+    public List<Participation> getParticipationBySportAndCity2(int userId, String sport, String city);
 
     //날짜&장소
     public List<Participation> getParticipationByMonthAndCity(int userId, int eventYear, int eventMonth, String city);
+    public List<Participation> getParticipationByMonthAndCity2(int userId, int eventYear, int eventMonth, String city);
     //종목&날짜&장소
     public List<Participation> getParticipationBySportAndMonthAndCity(int userId, String sport, int eventYear, int eventMonth, String city);
+    public List<Participation> getParticipationBySportAndMonthAndCity2(int userId, String sport, int eventYear, int eventMonth, String city);
 
     public Participation getOneParticipation(int userId, int id);
 

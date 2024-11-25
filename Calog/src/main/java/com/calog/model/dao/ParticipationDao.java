@@ -18,16 +18,25 @@ public interface ParticipationDao {
 
 
     List<Participation> selectAllByUserId(int userId);
+    List<Participation> selectAllByUserId2(int userId);
     List<Participation>  selectByUserIdFiltSport(@Param("userId")int userId,@Param("sport") String sport);
+    List<Participation>  selectByUserIdFiltSport2(@Param("userId")int userId,@Param("sport") String sport);
     List<Participation> selectByUserIdFiltMonth(@Param("userId")int userId, @Param("eventYear") int eventYear, @Param("eventMonth") int eventMonth);
+    List<Participation> selectByUserIdFiltMonth2(@Param("userId")int userId, @Param("eventYear") int eventYear, @Param("eventMonth") int eventMonth);
     List<Participation> selectByUserIdFiltCity(@Param("userId")int userId, @Param("city") String city);
 
+    List<Participation> selectByUserIdFiltCity2(@Param("userId")int userId, @Param("city") String city);
     List<Participation> selectByUserIdFiltSportAndMonth(@Param("userId")int userId, @Param("sport")String sport, @Param("eventYear") int eventYear, @Param("eventMonth") int eventMonth);
+    List<Participation> selectByUserIdFiltSportAndMonth2(@Param("userId")int userId, @Param("sport")String sport, @Param("eventYear") int eventYear, @Param("eventMonth") int eventMonth);
+
 
     List<Participation> selectByUserIdFiltSportAndCity(@Param("userId")int userId, @Param("sport") String sport, @Param("city") String city);
+    List<Participation> selectByUserIdFiltSportAndCity2(@Param("userId")int userId, @Param("sport") String sport, @Param("city") String city);
     List<Participation> selectByUserIdFiltMonthAndCity(@Param("userId")int userId, @Param("eventYear") int eventYear, @Param("eventMonth") int eventMonth, @Param("city") String city);
+    List<Participation> selectByUserIdFiltMonthAndCity2(@Param("userId")int userId, @Param("eventYear") int eventYear, @Param("eventMonth") int eventMonth, @Param("city") String city);
 
     List<Participation> selectByUserIdFiltSportAndMonthAndCity(@Param("userId")int userId, @Param("sport")String sport, @Param("eventYear") int eventYear, @Param("eventMonth") int eventMonth, @Param("city") String city );
+    List<Participation> selectByUserIdFiltSportAndMonthAndCity2(@Param("userId")int userId, @Param("sport")String sport, @Param("eventYear") int eventYear, @Param("eventMonth") int eventMonth, @Param("city") String city );
 
     Participation selectParticipationById(@Param("userId")int userId, @Param("id")int id);
 

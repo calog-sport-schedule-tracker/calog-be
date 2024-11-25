@@ -28,10 +28,29 @@ public class ParticipationController {
         }
         return ResponseEntity.ok(result);
     }
+    @GetMapping("/user/{userId}/participation2")
+    public ResponseEntity<?>getAllList2(@PathVariable("userId") int userId){
+        List<Participation> result = participationService.getAllParticipationByUserId2(userId);
+        if (result.size()==0)
+        {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(result);
+    }
     @GetMapping("/user/{userId}/participation/sport")
     public ResponseEntity<?>getListBySport(@PathVariable("userId") int userId,
                                            @RequestParam(value = "sport", required = false) String sport){
         List<Participation> result = participationService.getParticipationBySport(userId,sport);
+        if (result.size()==0)
+        {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/user/{userId}/participation/sport2")
+    public ResponseEntity<?>getListBySport2(@PathVariable("userId") int userId,
+                                           @RequestParam(value = "sport", required = false) String sport){
+        List<Participation> result = participationService.getParticipationBySport2(userId,sport);
         if (result.size()==0)
         {
             return ResponseEntity.noContent().build();
@@ -57,11 +76,42 @@ public class ParticipationController {
         }
         return ResponseEntity.ok(result);
     }
+    @GetMapping("/user/{userId}/participation/date2")
+    public ResponseEntity<?>getListByDate2(@PathVariable("userId") int userId,
+                                          @RequestParam(value = "eventDate", required = false) String eventDate){
+        //날짜 parsing
+        Integer eventYear = null;
+        Integer eventMonth = null;
+        if (eventDate != null && !eventDate.isEmpty()) {
+            String[] parts = eventDate.split("-");
+            eventYear = Integer.parseInt(parts[0]);
+            eventMonth = Integer.parseInt(parts[1]);
+        }
+
+        List<Participation> result = participationService.getParticipationByMonth2(userId,eventYear,eventMonth);
+        if (result.size()==0)
+        {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(result);
+    }
     @GetMapping("/user/{userId}/participation/city")
     public ResponseEntity<?>getListByCity(@PathVariable("userId") int userId,
                                           @RequestParam(value = "city", required = false) String city){
 
         List<Participation> result = participationService.getParticipationByCity(userId,city);
+
+        if (result.size()==0)
+        {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/user/{userId}/participation/city2")
+    public ResponseEntity<?>getListByCity2(@PathVariable("userId") int userId,
+                                          @RequestParam(value = "city", required = false) String city){
+
+        List<Participation> result = participationService.getParticipationByCity2(userId,city);
 
         if (result.size()==0)
         {
@@ -93,6 +143,28 @@ public class ParticipationController {
 
 
     }
+    @GetMapping("/user/{userId}/participation/sportDate2")
+    public ResponseEntity<?>getListByCity2(@PathVariable("userId") int userId,
+                                          @RequestParam(value = "sport", required = false) String sport,
+                                          @RequestParam(value = "eventDate", required = false) String eventDate){
+        //날짜 parsing
+        Integer eventYear = null;
+        Integer eventMonth = null;
+        if (eventDate != null && !eventDate.isEmpty()) {
+            String[] parts = eventDate.split("-");
+            eventYear = Integer.parseInt(parts[0]);
+            eventMonth = Integer.parseInt(parts[1]);
+        }
+        List<Participation>result = participationService.getParticipationBySportAndMonth2(userId,sport,eventYear,eventMonth);
+        if (result.size()==0)
+        {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(result);
+
+
+    }
+
 
     @GetMapping("/user/{userId}/participation/sportCity")
     public ResponseEntity<?> getListBySportAndCity(
@@ -101,6 +173,20 @@ public class ParticipationController {
             @RequestParam(value = "city", required = false) String city
     ) {
         List<Participation>result = participationService.getParticipationBySportAndCity(userId,sport,city);
+
+        if (result.size()==0)
+        {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/user/{userId}/participation/sportCity2")
+    public ResponseEntity<?> getListBySportAndCity2(
+            @PathVariable("userId") int userId,
+            @RequestParam(value = "sport", required = false) String sport,
+            @RequestParam(value = "city", required = false) String city
+    ) {
+        List<Participation>result = participationService.getParticipationBySportAndCity2(userId,sport,city);
 
         if (result.size()==0)
         {
@@ -130,6 +216,28 @@ public class ParticipationController {
         }
         return ResponseEntity.ok(result);
     }
+    @GetMapping("/user/{userId}/participation/dateCity2")
+    public ResponseEntity<?> getListByDateAndCity2(
+            @PathVariable("userId") int userId,
+            @RequestParam(value = "eventDate", required = false) String eventDate,
+            @RequestParam(value = "city", required = false) String city
+    ) {
+        //날짜 parsing
+        Integer eventYear = null;
+        Integer eventMonth = null;
+        if (eventDate != null && !eventDate.isEmpty()) {
+            String[] parts = eventDate.split("-");
+            eventYear = Integer.parseInt(parts[0]);
+            eventMonth = Integer.parseInt(parts[1]);
+        }
+        List<Participation>result = participationService.getParticipationByMonthAndCity2(userId,eventYear,eventMonth,city);
+
+        if (result.size()==0)
+        {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(result);
+    }
     @GetMapping("/user/{userId}/participation/sportDateCity")
     public ResponseEntity<?> getParticipationBySportAndDateAndCity(
             @PathVariable("userId") int userId,
@@ -146,6 +254,29 @@ public class ParticipationController {
             eventMonth = Integer.parseInt(parts[1]);
         }
         List<Participation>result = participationService.getParticipationBySportAndMonthAndCity(userId,sport,eventYear,eventMonth,city);
+
+        if (result.size()==0)
+        {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/user/{userId}/participation/sportDateCity2")
+    public ResponseEntity<?> getParticipationBySportAndDateAndCity2(
+            @PathVariable("userId") int userId,
+            @RequestParam(value = "sport", required = false) String sport,
+            @RequestParam(value = "eventDate", required = false) String eventDate,
+            @RequestParam(value = "city", required = false) String city
+    ) {
+        //날짜 parsing
+        Integer eventYear = null;
+        Integer eventMonth = null;
+        if (eventDate != null && !eventDate.isEmpty()) {
+            String[] parts = eventDate.split("-");
+            eventYear = Integer.parseInt(parts[0]);
+            eventMonth = Integer.parseInt(parts[1]);
+        }
+        List<Participation>result = participationService.getParticipationBySportAndMonthAndCity2(userId,sport,eventYear,eventMonth,city);
 
         if (result.size()==0)
         {
