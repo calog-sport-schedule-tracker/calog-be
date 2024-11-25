@@ -15,12 +15,24 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin("*")
+
 public class UserController {
     private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    //쿠키는 정상적으로 도착함
+    @GetMapping("/test")
+    public ResponseEntity<String> test(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                System.out.println("Cookie: " + cookie.getName() + " = " + cookie.getValue());
+            }
+        }
+        return ResponseEntity.ok("Cookies logged");
     }
 
     //회원가입
@@ -72,6 +84,17 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 필요");
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("LogIn", null);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return ResponseEntity.status(HttpStatus.OK).body("Logged out");
+    }
+
 
 
 
