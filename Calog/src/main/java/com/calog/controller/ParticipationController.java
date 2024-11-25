@@ -3,6 +3,8 @@ package com.calog.controller;
 import com.calog.model.dto.Participation;
 import com.calog.model.dto.ParticipationRequest;
 import com.calog.model.service.ParticipationService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +15,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
+
 public class ParticipationController {
     private final ParticipationService participationService;
     public ParticipationController(ParticipationService participationService){
         this.participationService = participationService;
     }
+
     @GetMapping("/user/{userId}/participation")
     public ResponseEntity<?>getAllList(@PathVariable("userId") int userId){
         List<Participation> result = participationService.getAllParticipationByUserId(userId);
