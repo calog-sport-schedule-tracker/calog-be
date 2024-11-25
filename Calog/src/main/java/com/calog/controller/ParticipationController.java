@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
+
 public class ParticipationController {
     private final ParticipationService participationService;
     public ParticipationController(ParticipationService participationService){
