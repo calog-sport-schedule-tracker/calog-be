@@ -93,4 +93,9 @@ public class ParticipationServiceImpl implements ParticipationService {
     public boolean deleteParticipation(int userId,int id){
         return pd.deleteParticipation(userId,id);
     }
+
+    @Override
+    public int getUserParticipationSum(int userId, String sport){
+        return pd.calUserParticipationBySport(userId,sport);
+    }
 }

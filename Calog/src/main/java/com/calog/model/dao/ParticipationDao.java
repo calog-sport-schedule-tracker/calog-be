@@ -31,5 +31,7 @@ public interface ParticipationDao {
 
     Participation selectParticipationById(@Param("userId")int userId, @Param("id")int id);
 
+    int calUserParticipationBySport(@Param("userId")int userId, @Param("sport")String sport);
+
 
 }

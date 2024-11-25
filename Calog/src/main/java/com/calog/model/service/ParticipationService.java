@@ -37,4 +37,6 @@ public interface ParticipationService {
     public Participation getOneParticipation(int userId, int id);
 
     public boolean deleteParticipation(int userId,int id);
+
+    public int getUserParticipationSum(int userId, String sport);
 }
