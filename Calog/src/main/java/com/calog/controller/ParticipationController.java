@@ -214,6 +214,37 @@ public class ParticipationController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/user/{userId}/participation/marathon")
+    public ResponseEntity<?>getUserMarathon(@PathVariable("userId")int userId){
+        int result = participationService.getUserParticipationSum(userId,"마라톤");
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/user/{userId}/participation/tennis")
+    public ResponseEntity<?>getUserTennis(@PathVariable("userId")int userId){
+        int result = participationService.getUserParticipationSum(userId,"테니스");
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/user/{userId}/participation/badminton")
+    public ResponseEntity<?>getUserBadminton(@PathVariable("userId")int userId){
+        int result = participationService.getUserParticipationSum(userId,"배드민턴");
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/user/{userId}/participation/granfondo")
+    public ResponseEntity<?>getUserGranfondo(@PathVariable("userId")int userId){
+        int result = participationService.getUserParticipationSum(userId,"그랑폰도");
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/user/{userId}/participation/triathlon")
+    public ResponseEntity<?>getUserTriathlon(@PathVariable("userId")int userId){
+        int result = participationService.getUserParticipationSum(userId,"철인3종");
+        return ResponseEntity.ok(result);
+    }
+
+
 
 
 
