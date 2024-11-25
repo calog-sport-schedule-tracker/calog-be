@@ -220,7 +220,7 @@ INSERT INTO detail (category, event_id) VALUES
 
 
 
-INSERT INTO participation (memo,completion_time,event_id,user_id) VALUES
-('오늘 완주 성공!','04:52:26',1,1),
-('오늘 두 번째 완주 성공!','01:02:10',2,1),
-('힘들어!','01:32:16',4,2);
+INSERT INTO participation (memo,completion_time,event_id,user_id,detail) VALUES
+('오늘 완주 성공!','04:52:26',1,1,'Full Marathon'),
+('오늘 두 번째 완주 성공!','01:02:10',2,1,'5km'),
+('힘들어!','01:32:16',4,2,'10km');
