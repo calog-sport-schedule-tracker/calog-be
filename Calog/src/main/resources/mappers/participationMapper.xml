@@ -135,7 +135,7 @@
         </if>
         ORDER BY e.event_date;
     </select>
-    <select id="selectByUserIdFiltCity" resultMap="ParticipationResultMap" parameterType="map">
+    <select id="selectByUserIdFiltCity2" resultMap="ParticipationResultMap" parameterType="map">
         SELECT p.*
         FROM participation p
         JOIN event e ON p.event_id = e.id
