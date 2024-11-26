@@ -78,7 +78,7 @@ public class UserController {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("LogIn".equals(cookie.getName())) {
-                    return ResponseEntity.ok(cookie.getValue());
+                    return ResponseEntity.ok(1);
                 }
             }
         }

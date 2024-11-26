@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calog.model.dao.FavoriteDao">
+
+
+    <resultMap id="FavoriteResultMap" type="com.calog.model.dto.Favorite">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="eventId" column="event_id" />
+        <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <resultMap id="EventResultMap" type="com.calog.model.dto.Event">
+        <id property="id" column="id" />
+        <result property="eventName" column="event_name" />
+        <result property="sport" column="sport" />
+        <result property="eventDate" column="event_date" />
+        <result property="address" column="address" />
+        <result property="city" column="city" />
+        <result property="registrationStart" column="registration_start" />
+        <result property="registrationDeadline" column="registration_deadline" />
+        <result property="img" column="img" />
+    </resultMap>
+
+
+    <insert id="insertFavorite" parameterType="map">
+        INSERT INTO favorite (user_id, event_id, updated_at)
+        VALUES (#{userId}, #{eventId}, NOW())
+    </insert>
+
+    <delete id="deleteFavorite" parameterType="map">
+        DELETE FROM favorite
+        WHERE user_id = #{userId}
+        AND event_id = #{eventId}
+    </delete>
+
+
+    <select id="checkFavorite" parameterType="map" resultType="boolean">
+        SELECT EXISTS (
+        SELECT 1
+        FROM favorite
+        WHERE user_id = #{userId}
+        AND event_id = #{eventId}
+        )
+    </select>
+
+    <select id="selectFavoritesByUser" resultMap="EventResultMap" parameterType="int">
+        SELECT e.*
+        FROM favorite f
+        INNER JOIN event e ON f.event_id = e.id
+        WHERE f.user_id = #{userId}
+    </select>
+
+
+
+    <select id="selectFavoritesByEvent" resultMap="FavoriteResultMap" parameterType="int">
+        SELECT *
+        FROM favorite
+        WHERE event_id = #{eventId}
+    </select>
+</mapper>
